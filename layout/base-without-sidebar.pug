@@ -1,4 +1,4 @@
-include _partial/helpers
+include _partial/helpers.pug
 
 if page.title
   - var current_title = page.title
@@ -14,10 +14,8 @@ if config.feed
       - var feed_type='application/atom+xml'
 
 doctype html
-html(lang='#{config.language}')
-
-  include _partial/head
-
+html(lang=config.language)
+  include _partial/head.pug
   body: .body_container
     #header
       .site-name
@@ -32,7 +30,9 @@ html(lang='#{config.language}')
       .pure-u-1.pure-u-md-4-4: .content_container
         block content
       .pure-u-1.pure-u-md-4-4
-        != partial('_partial/footer.jade')
+        != partial('_partial/footer.pug')
 
-    include _partial/totop
-    include _partial/after_footer
+    if theme.totop == true
+      include _partial/totop.pug
+
+    include _partial/after_footer.pug
